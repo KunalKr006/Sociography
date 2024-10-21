@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -32,7 +33,11 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: 'https://sociography-1.onrender.com', // Replace with your actual frontend URL
+  credentials: true,
+}));
+
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* FILE STORAGE */
